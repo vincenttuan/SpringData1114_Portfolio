@@ -17,6 +17,7 @@
                         $("#myform").find("#password").val(data.password);
                         $("#myform").find("#email").val(data.email);
                         $("#myform").find("#balance").val(data.balance);
+                        $("#msg").text("");
                         $("#add").attr("disabled", true);
                         $("#upt").attr("disabled", false);
                         $("#del").attr("disabled", false);
