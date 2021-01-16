@@ -111,5 +111,13 @@ public class InvestorController {
         return true;
     }
     
+    @GetMapping("/duplicate/{username}")
+    public Boolean isDuplicateUsername(@PathVariable("username") Optional<String> username) {
+        if(username.isPresent()) {
+            Investor investor = service.getInvestorRepository().getInvestor(username.get());
+            return  investor == null ? false : true;
+        }
+        return false;
+    }
     
 }
