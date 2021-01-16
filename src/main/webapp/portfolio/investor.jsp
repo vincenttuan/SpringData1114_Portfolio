@@ -65,6 +65,9 @@
                         }
                     });
                 });
+                $("#myform").find("#username").blur(function() {
+                    console.log($("#myform").find("#username").value);
+                });
                 // 資料列表
                 table_list();
             });
