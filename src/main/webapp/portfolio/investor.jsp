@@ -17,6 +17,10 @@
                         $("#myform").find("#password").val(data.password);
                         $("#myform").find("#email").val(data.email);
                         $("#myform").find("#balance").val(data.balance);
+                        $("#add").attr("disabled", true);
+                        $("#upt").attr("disabled", false);
+                        $("#del").attr("disabled", false);
+                        $("#username").attr("readonly", true);
                     });
                 });
                 $("#add").on("click", function () {
@@ -32,6 +36,7 @@
                         processData: false,
                         success: function (resposeJsonObject) {
                             //alert(JSON.stringify(resposeJsonObject));
+                            resetForm();
                             table_list();
                         }
                     });
@@ -48,6 +53,7 @@
                         cache: false,
                         processData: false,
                         success: function (resposeJsonObject) {
+                            resetForm();
                             table_list();
                         }
                     });
@@ -61,12 +67,14 @@
                         cache: false,
                         processData: false,
                         success: function (resposeJsonObject) {
+                            resetForm();
                             table_list();
                         }
                     });
                 });
                 $("#username").blur(function() {
                     console.log($("#username").val());
+                    alert($("#upt").attr("disabled"));
                     var username = $("#username").val();
                     $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/duplicate/" + username, function (data, status) {
                         console.log(data);
@@ -82,6 +90,15 @@
                 // 資料列表
                 table_list();
             });
+            // myform重製方法
+            function resetForm() {
+                $("#myform").get(0).reset();
+                $("#msg").text("");
+                $("#username").attr("readonly", false);
+                $("#add").attr("disabled", true);
+                $("#upt").attr("disabled", true);
+                $("#del").attr("disabled", true);
+            }
             // 資料列表
             function table_list() {
                 $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/", function (datas, status) {
@@ -130,8 +147,8 @@
                                     <input id="balance" name="balance" placeholder="balance" type="number"/><p />
                                     
                                     <button id="add" type="button" class="pure-button pure-button-primary" disabled>新增</button>
-                                    <button id="upt" type="button" class="pure-button pure-button-primary">修改</button>
-                                    <button id="del" type="button" class="pure-button pure-button-primary">刪除</button>
+                                    <button id="upt" type="button" class="pure-button pure-button-primary" disabled>修改</button>
+                                    <button id="del" type="button" class="pure-button pure-button-primary" disabled>刪除</button>
                                     
                                 </fieldset>
                             </form>
