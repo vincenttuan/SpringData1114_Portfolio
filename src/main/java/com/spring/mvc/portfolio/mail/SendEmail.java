@@ -23,6 +23,10 @@ import javax.mail.Session;
 import javax.mail.Transport;
 
 public class SendEmail {
+    // Gmail 與 授權碼(非 Google 密碼)
+    private static final String googleGmail = "vincenttuan@gmail.com"; // 你的 Gmail
+    private static final String authPassword = "oxtmajaqaelarcoe"; // 你的授權碼
+
     public static void main(String[] args) throws Exception {
         String personal = "Hello"; // 發送者姓名
         String to = "vincenttuan@gmail.com"; // 發送給誰 ? 若有多筆", "號隔開
@@ -35,10 +39,6 @@ public class SendEmail {
     }
     
     public void submit(String personal, String to, String title, String html) throws Exception {
-        // Gmail 與 授權碼(非 Google 密碼)
-        final String googleGmail = "vincenttuan@gmail.com"; // 你的 Gmail
-        final String authPassword = "oxtmajaqaelarcoe"; // 你的授權碼
-
         // smpt 設定資訊
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
