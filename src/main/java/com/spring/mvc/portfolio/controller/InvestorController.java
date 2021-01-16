@@ -23,6 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class InvestorController {
     @Autowired
     private PortfolioService service;
+    
+    @Autowired
+    private EmailService emailService;
+    
     // 新增
     @PostMapping(value = {"/", "/add"})
     public Investor add(@RequestBody Map<String, String> jsonMap) {
@@ -35,6 +39,9 @@ public class InvestorController {
         investor.setEmail(jsonMap.get("email"));
         investor.setBalance(Integer.parseInt(jsonMap.get("balance")));
         investor.setPass(Boolean.FALSE);
+        // 設定 email 認證碼
+        investor.setCode(Integer.toHexString(investor.hashCode()));
+        
         // 建立 Watch
         Watch watch = new Watch();
         watch.setInvestor(investor);
@@ -44,9 +51,10 @@ public class InvestorController {
         // 存檔 Watch
         service.getWatchRepository().save(watch);
         
+        // 發送認證信件
+        emailService.send(investor);
+        
         return investor;
-        
-        
         
     }
     
