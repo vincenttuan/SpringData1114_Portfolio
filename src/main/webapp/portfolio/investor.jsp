@@ -74,7 +74,9 @@
                 });
                 $("#username").blur(function() {
                     console.log($("#username").val());
-                    alert($("#upt").attr("disabled"));
+                    if(!$("#upt").is(":disabled")) {
+                        return;
+                    }
                     var username = $("#username").val();
                     $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/duplicate/" + username, function (data, status) {
                         console.log(data);
