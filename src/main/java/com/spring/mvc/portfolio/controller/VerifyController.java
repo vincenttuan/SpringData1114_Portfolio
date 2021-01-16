@@ -24,7 +24,7 @@ public class VerifyController {
     @Transactional
     public String verify(HttpSession session,
                          @PathVariable("id") Optional<Integer> id,
-                         @PathVariable("code") Optional<Integer> code) {
+                         @PathVariable("code") Optional<String> code) {
         String message = "ERROR";
         Investor investor = service.getInvestorRepository().findOne(id.get());
         if(investor != null && investor.getCode().equals(code.get())) {
