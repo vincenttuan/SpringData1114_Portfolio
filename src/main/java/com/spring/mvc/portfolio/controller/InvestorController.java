@@ -58,4 +58,9 @@ public class InvestorController {
         
     }
     
+    // 查詢全部
+    @GetMapping(value = {"/", "/query"})
+    public List<Investor> queryAll() {
+        return service.getInvestorRepository().findAll();
+    }
 }
