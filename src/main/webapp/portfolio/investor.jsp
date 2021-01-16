@@ -65,8 +65,19 @@
                         }
                     });
                 });
-                $("#myform").find("#username").blur(function() {
-                    console.log($("#myform").find("#username").value);
+                $("#username").blur(function() {
+                    console.log($("#username").val());
+                    var username = $("#username").val();
+                    $.get("${pageContext.request.contextPath}/mvc/portfolio/investor/duplicate/" + username, function (data, status) {
+                        console.log(data);
+                        if(data) {
+                            $("#add").attr("disabled", true);
+                            $("#msg").text("重複名稱");
+                        } else {
+                            $("#add").attr("disabled", false);
+                            $("#msg").text("");
+                        }
+                    });
                 });
                 // 資料列表
                 table_list();
@@ -113,7 +124,7 @@
                                     <legend> <h2 class="content-subhead">資料維護</h2></legend>
                                     
                                     <input id="id" vslue="0"   name="id" placeholder="ID" readonly="true"/><p />
-                                    <input id="username" name="username" placeholder="username"/><p />
+                                    <input id="username" name="username" placeholder="username"/>&nbsp;&nbsp;<span id="msg" style="color: red"></span><p />
                                     <input id="password" name="password" placeholder="password"/><p />
                                     <input id="email" name="email" placeholder="email"/><p />
                                     <input id="balance" name="balance" placeholder="balance" type="number"/><p />
