@@ -129,7 +129,7 @@
                                     <input id="email" name="email" placeholder="email"/><p />
                                     <input id="balance" name="balance" placeholder="balance" type="number"/><p />
                                     
-                                    <button id="add" type="button" class="pure-button pure-button-primary">新增</button>
+                                    <button id="add" type="button" class="pure-button pure-button-primary" disabled>新增</button>
                                     <button id="upt" type="button" class="pure-button pure-button-primary">修改</button>
                                     <button id="del" type="button" class="pure-button pure-button-primary">刪除</button>
                                     
