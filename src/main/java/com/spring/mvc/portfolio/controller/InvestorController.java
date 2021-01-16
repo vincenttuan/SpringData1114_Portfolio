@@ -7,6 +7,7 @@ import com.spring.mvc.portfolio.service.EmailService;
 import com.spring.mvc.portfolio.service.PortfolioService;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -63,4 +64,11 @@ public class InvestorController {
     public List<Investor> queryAll() {
         return service.getInvestorRepository().findAll();
     }
+    
+    // 查詢單筆(根據 id)
+    @GetMapping(value = {"/{id}"})
+    public Investor get(@PathVariable("id") Optional<Integer> id) {
+        return service.getInvestorRepository().findOne(id.get());
+    }
+    
 }
