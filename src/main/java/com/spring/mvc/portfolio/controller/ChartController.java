@@ -10,7 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/portfolio/chart")
 public class ChartController {
+    @Autowired
+    private AssetRepository assetRepository;
     
-    
+    @GetMapping("/asset/{invid}")
+    public List asset(@PathVariable("invid") Optional<Integer> invid) {
+        return assetRepository.findByInvid(invid.get());
+    }
 }
