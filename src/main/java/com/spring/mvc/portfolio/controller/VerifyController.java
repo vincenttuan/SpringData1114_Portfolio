@@ -21,6 +21,7 @@ public class VerifyController {
     
     // 驗證 : /3/6281597b
     @GetMapping("/{id}/{code}")
+    @Transactional
     public String verify(HttpSession session,
                          @PathVariable("id") Optional<Integer> id,
                          @PathVariable("code") Optional<Integer> code) {
