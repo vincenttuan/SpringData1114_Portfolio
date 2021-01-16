@@ -16,8 +16,18 @@ public class ChartController {
     @Autowired
     private AssetRepository assetRepository;
     
+    @Autowired
+    private ProfitRepository profitRepository;
+    
     @GetMapping("/asset/{invid}")
     public List asset(@PathVariable("invid") Optional<Integer> invid) {
         return assetRepository.findByInvid(invid.get());
     }
+    
+    @GetMapping("/profit/{invid}")
+    public List profit(@PathVariable("invid") Optional<Integer> invid) {
+        return profitRepository.findByInvid(invid.get());
+    }
+    
+    
 }
