@@ -18,8 +18,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController // @Controller + @ResponseBody
+@RequestMapping("/portfolio/investor")
 public class InvestorController {
-    
-    
+    @Autowired
+    private PortfolioService service;
+    // 新增
+    @PostMapping(value = {"/", "/add"})
+    public Investor add(@RequestBody Map<String, String> jsonMap) {
+        // jsonMap 就是前端傳來的 json 字串所轉換後的集合資料
+        // {"username":"admin","password":"1234","email":"vincentjava@yahoo.com.tw","balance":"200"}
+        // 建立 Investor
+        Investor investor = new Investor();
+        investor.setUsername(jsonMap.get("username"));
+        investor.setPassword(jsonMap.get("password"));
+        investor.setEmail(jsonMap.get("email"));
+        investor.setBalance(Integer.parseInt(jsonMap.get("balance")));
+        investor.setPass(Boolean.FALSE);
+        // 建立 Watch
+        Watch watch = new Watch();
+        watch.setInvestor(investor);
+        watch.setName(investor.getUsername() + "的投資組合");
+        // 存檔 Investor
+        service.getInvestorRepository().save(investor);
+        // 存檔 Watch
+        service.getWatchRepository().save(watch);
+        
+        return investor;
+        
+        
+        
+    }
     
 }
